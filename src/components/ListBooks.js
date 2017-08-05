@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 class ListBooks extends Component {
+
   render() {
     return (
       <div className="bookshelf-books">
@@ -12,7 +13,7 @@ class ListBooks extends Component {
                   <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                     <div className="book-shelf-changer">
-                      <select>
+                      <select value={book.shelf}>
                         <option value="none" disabled>Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
