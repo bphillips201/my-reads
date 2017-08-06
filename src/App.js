@@ -1,13 +1,27 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom';
-import * as BooksAPI from './utils/BooksAPI'
+import * as BooksAPI from './utils/BooksAPI';
 import ListShelves from './components/ListShelves';
 import SearchBooks from './components/SearchBooks';
 import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    books: []
+    books: [],
+    shelves: [
+      {
+        id: "currentlyReading",
+        label: "Currently Reading"
+      },
+      {
+        id: "wantToRead",
+        label: "Want to Read"
+      },
+      {
+        id: "read",
+        label: "Read"
+      }
+    ]
   }
 
   componentDidMount() {
@@ -29,7 +43,9 @@ class BooksApp extends React.Component {
       <div className="app">
         <Route path="/search" render={() => (
           <SearchBooks
+            shelves={this.state.shelves}
             bookData={this.state.books}
+            updateShelf={this.updateShelf}
           />
         )}/>
         <Route exact path="/" render={() => (
@@ -40,7 +56,8 @@ class BooksApp extends React.Component {
             <div className="list-books-content">
               <div>
                 <ListShelves
-                  books={this.state.books}
+                  shelves={this.state.shelves}
+                  bookData={this.state.books}
                   updateShelf={this.updateShelf}
                 />
               </div>
