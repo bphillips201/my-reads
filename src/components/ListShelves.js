@@ -8,18 +8,15 @@ class ListShelves extends Component {
     shelves: [
       {
         id: "currentlyReading",
-        label: "Currently Reading",
-        books: []
+        label: "Currently Reading"
       },
       {
         id: "wantToRead",
-        label: "Want to Read",
-        books: []
+        label: "Want to Read"
       },
       {
         id: "read",
-        label: "Read",
-        books: []
+        label: "Read"
       }
     ]
   };
@@ -35,6 +32,7 @@ class ListShelves extends Component {
             <ListBooks
               bookData={this.props.books}
               bookshelf={bookshelf}
+              updateShelf={this.props.updateShelf}
             />
           </div>
         ))}

@@ -15,6 +15,12 @@ class BooksApp extends React.Component {
       })
   }
 
+  updateShelf = (book, shelf) => {
+    this.setState(() => {
+      book.shelf = shelf;
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -49,6 +55,7 @@ class BooksApp extends React.Component {
               <div>
                 <ListShelves
                   books={this.state.books}
+                  updateShelf={this.updateShelf}
                 />
               </div>
             </div>
