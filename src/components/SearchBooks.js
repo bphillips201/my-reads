@@ -30,7 +30,7 @@ class SearchBooks extends Component {
 
   render() {
 
-    // compare my library with search results
+    // update shelf status for search results
     this.state.searchResults.forEach((result) => {
       const myBook = this.props.library.find(l => l.id === result.id);
       myBook ? result.shelf = myBook.shelf : result.shelf = "none";
