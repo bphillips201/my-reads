@@ -31,9 +31,11 @@ class SearchBooks extends Component {
   render() {
 
     // update shelf status for search results
-    this.state.searchResults.forEach((result) => {
-      const myBook = this.props.library.find(l => l.id === result.id);
-      myBook ? result.shelf = myBook.shelf : result.shelf = "none";
+    const shelvedSearchResults = this.state.searchResults.map((r) => {
+      const result = Object.assign({}, r);
+      const myBook = this.props.library.find(book => book.id === result.id);
+      result.shelf = myBook ? myBook.shelf : "none";
+      return result;
     });
 
     return (
@@ -46,7 +48,7 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.searchResults.map((book) => (
+            {shelvedSearchResults.map((book) => (
               <li key={book.id}>
                 <Book
                   book={book}
