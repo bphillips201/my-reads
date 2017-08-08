@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Book from './Book';
 
 class ListShelves extends Component {
+  
   render() {
 
     return (
@@ -15,11 +16,12 @@ class ListShelves extends Component {
                 {this.props.library
                   .filter(b => (b.shelf === bookshelf.id))
                   .map((book) => (
-                  <Book
-                    key={book.id}
-                    book={book}
-                    updateShelf={this.props.updateShelf}
-                  />
+                  <li key={book.id}>
+                    <Book
+                      book={book}
+                      updateShelf={this.props.updateShelf}
+                    />
+                  </li>
                 ))}
               </ol>
             </div>

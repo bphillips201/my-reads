@@ -30,6 +30,12 @@ class SearchBooks extends Component {
 
   render() {
 
+    // compare my library with search results
+    this.state.searchResults.forEach((result) => {
+      const myBook = this.props.library.find(l => l.id === result.id);
+      myBook ? result.shelf = myBook.shelf : result.shelf = "none";
+    });
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -41,11 +47,12 @@ class SearchBooks extends Component {
         <div className="search-books-results">
           <ol className="books-grid">
             {this.state.searchResults.map((book) => (
-              <Book
-                key={book.id}
-                book={book}
-                updateShelf={this.props.updateShelf}
-              />
+              <li key={book.id}>
+                <Book
+                  book={book}
+                  updateShelf={this.props.updateShelf}
+                />
+              </li>
             ))}
           </ol>
         </div>
