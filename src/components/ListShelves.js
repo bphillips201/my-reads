@@ -12,7 +12,7 @@ class ListShelves extends Component {
 
             <div className="bookshelf-books">
               <ListBooks
-                bookData={this.props.bookData}
+                library={this.props.library}
                 shelf={bookshelf.id}
                 updateShelf={this.props.updateShelf}
               />

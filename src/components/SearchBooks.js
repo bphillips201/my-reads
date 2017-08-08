@@ -6,7 +6,7 @@ import ListBooks from './ListBooks';
 class SearchBooks extends Component {
   state = {
     query: '',
-    bookList: [],
+    searchResults: [],
     maxResults: 20
   }
 
@@ -21,9 +21,9 @@ class SearchBooks extends Component {
   searchBooks = (query) => {
     BooksAPI.search(query, 20).then((books) => {
       if (typeof(books) === 'undefined' || books.error || query.length === 0) {
-        this.setState({ bookList: [] })
+        this.setState({ searchResults: [] })
       } else {
-        this.setState({ bookList: books })
+        this.setState({ searchResults: books })
       }
     })
   }
@@ -48,8 +48,9 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ListBooks
-            bookData={this.state.bookList}
-            shelf=""
+            searchResults={this.state.searchResults}
+            library={this.props.library}
+            shelf={null}
             updateShelf={this.props.updateShelf}
           />
         </div>
