@@ -11,21 +11,22 @@ class SearchBooks extends Component {
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query });
-    
-    if (query.length) {
-      this.searchBooks(query);
-    }
+    this.setState({ query });
+    this.searchBooks(query);
   }
 
   searchBooks = (query) => {
-    BooksAPI.search(query, 20).then((books) => {
-      if (typeof(books) === 'undefined' || books.error || query.length === 0) {
-        this.setState({ searchResults: [] })
-      } else {
-        this.setState({ searchResults: books })
-      }
-    })
+    if (query) {
+      BooksAPI.search(query, 20).then((books) => {
+        if (typeof(books) === 'undefined' || books.error || query.length === 0) {
+          this.setState({ searchResults: [] })
+        } else {
+          this.setState({ searchResults: books })
+        }
+      })
+    } else {
+      this.setState({ searchResults: [] })     
+    }
   }
 
   render() {
