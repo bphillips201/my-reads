@@ -23,19 +23,19 @@ class SearchBooks extends Component {
       if (typeof(books) === 'undefined' || books.error || query.length === 0) {
         this.setState({ searchResults: [] })
       } else {
-        const shelvedSearchResults = books.map((r) => {
-          const result = Object.assign({}, r);
-          const myBook = this.props.library.find(book => book.id === result.id);
-          result.shelf = myBook ? myBook.shelf : "none";
-          return result;
-        });
-        
-        this.setState({ searchResults: shelvedSearchResults })
+        this.setState({ searchResults: books })
       }
     })
   }
 
   render() {
+
+    const shelvedSearchResults = this.state.searchResults.map((r) => {
+      const result = Object.assign({}, r);
+      const myBook = this.props.library.find(book => book.id === result.id);
+      result.shelf = myBook ? myBook.shelf : "none";
+      return result;
+    });
 
     return (
       <div className="search-books">
@@ -47,7 +47,7 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.searchResults.map((book) => (
+            {shelvedSearchResults.map((book) => (
               <li key={book.id}>
                 <Book
                   book={book}

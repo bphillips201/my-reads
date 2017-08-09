@@ -35,9 +35,11 @@ class BooksApp extends React.Component {
 
     if (!libraryBook) {
       this.addToShelf(book, shelf); 
-    } else if (libraryBook && shelf === "none") {
+    } 
+    else if (libraryBook && shelf === "none") {
       this.removeFromShelf(book);
-    } else {
+    } 
+    else {
       this.setState(() => {
         libraryBook.shelf = shelf;
       });
