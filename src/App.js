@@ -31,24 +31,39 @@ class BooksApp extends React.Component {
   }
 
   updateShelf = (book, shelf) => {
-    if (this.state.books.findIndex(l => l.id === book.id) === -1) {
-      this.addToShelf(book); 
+    const libraryBook = this.state.books.find(b => b.id === book.id);
+
+    if (!libraryBook) {
+      this.addToShelf(book, shelf); 
+    } else if (libraryBook && shelf === "none") {
+      this.removeFromShelf(book);
+    } else {
+      this.setState(() => {
+        libraryBook.shelf = shelf;
+      });
     }
 
-    BooksAPI.update(book, shelf).then(() => {
-      this.setState(() => {
-        book.shelf = shelf;
-      });
-    });
+    BooksAPI.update(book, shelf);
   }
 
-  addToShelf = (book) => {
+  addToShelf = (book, shelf) => {
+    book.shelf = shelf;
+
     this.setState(state => ({
       books: state.books.concat([ book ])
     }))
   }
 
+  removeFromShelf = (book) => {
+    this.setState(state => ({
+      books: state.books.filter(b => b.id !== book.id)
+    }))
+  }
+
   render() {
+
+    console.log(this.state.books);
+
     return (
       <div className="app">
         <Route path="/search" render={() => (
