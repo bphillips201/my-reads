@@ -30,6 +30,9 @@ class SearchBooks extends Component {
 
   render() {
 
+    /*
+     * Display appropriate shelf for each book in searchResults
+     */
     const shelvedSearchResults = this.state.searchResults.map((r) => {
       const result = Object.assign({}, r);
       const myBook = this.props.library.find(book => book.id === result.id);
