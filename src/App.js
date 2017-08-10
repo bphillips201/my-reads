@@ -40,9 +40,8 @@ class BooksApp extends React.Component {
       this.removeFromShelf(book);
     } 
     else {
-      this.setState(() => {
-        libraryBook.shelf = shelf;
-      });
+      this.removeFromShelf(book);
+      this.addToShelf(book, shelf);
     }
 
     BooksAPI.update(book, shelf);
