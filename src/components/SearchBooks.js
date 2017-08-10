@@ -6,8 +6,7 @@ import Book from './Book';
 class SearchBooks extends Component {
   state = {
     query: '',
-    searchResults: [],
-    maxResults: 20
+    searchResults: []
   }
 
   updateQuery = (query) => {
