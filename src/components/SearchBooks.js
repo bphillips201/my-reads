@@ -16,9 +16,9 @@ class SearchBooks extends Component {
   }
 
   searchBooks = (query) => {
-    if (query) {
+    if (query.length) {
       BooksAPI.search(query, 20).then((books) => {
-        if (typeof(books) === 'undefined' || books.error || query.length === 0) {
+        if (typeof(books) === 'undefined' || books.error) {
           this.setState({ searchResults: [] })
         } else {
           this.setState({ searchResults: books })
